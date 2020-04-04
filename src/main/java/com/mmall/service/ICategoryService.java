@@ -8,4 +8,8 @@ public interface ICategoryService {
 
     public ServerResponse updateCategoryName(String categoryName,Integer categoryId);
 
+    public ServerResponse getChildrenCategoryByParentId(Integer parentId);
+
+    public ServerResponse selectCategoryAndChildrenById(Integer categoryId);
+
 }

@@ -35,7 +35,7 @@ public class CategoryManagerController {
         if(response.isSuccess()){
             return iCategoryService.addCategory(categoryName,parentId);
         }else{
-            return ServerResponse.createByErrorMessage("没有权限");
+            return ServerResponse.createByErrorMessage("不是管理员，没有权限");
         }
     }
 
@@ -49,7 +49,36 @@ public class CategoryManagerController {
         if(iUserService.checkAdmin(user).isSuccess()){
             return iCategoryService.updateCategoryName(categoryName,categoryId);
         }else{
-            return ServerResponse.createByErrorMessage("没有权限");
+            return ServerResponse.createByErrorMessage("不是管理员，没有权限");
+        }
+    }
+
+
+    @ResponseBody
+    @RequestMapping("get_category.do")
+    public ServerResponse getChildrenParallelCategory(HttpSession session,@RequestParam(value = "categoryId",defaultValue = "0") Integer categoryId){
+        User user=(User)session.getAttribute(Const.CURRENT_USER);
+        if(user==null){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登陆，请先登陆");
+        }
+        if(iUserService.checkAdmin(user).isSuccess()){
+            return iCategoryService.getChildrenCategoryByParentId(categoryId);
+        }else{
+            return ServerResponse.createByErrorMessage("不是管理员，没有权限");
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping("get_deep_category.do")
+    public ServerResponse getCategoryAndDeepChildrenCategory(HttpSession session,@RequestParam(value = "categoryId",defaultValue = "0") Integer categoryId){
+        User user=(User)session.getAttribute(Const.CURRENT_USER);
+        if(user==null){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登陆，请先登陆");
+        }
+        if(iUserService.checkAdmin(user).isSuccess()){
+            return iCategoryService.selectCategoryAndChildrenById(categoryId);
+        }else{
+            return ServerResponse.createByErrorMessage("不是管理员，没有权限");
         }
     }
 
