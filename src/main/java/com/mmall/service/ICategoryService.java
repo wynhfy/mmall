@@ -1,6 +1,7 @@
 package com.mmall.service;
 
 import com.mmall.common.ServerResponse;
+import java.util.List;
 
 public interface ICategoryService {
 
@@ -10,6 +11,6 @@ public interface ICategoryService {
 
     public ServerResponse getChildrenCategoryByParentId(Integer parentId);
 
-    public ServerResponse selectCategoryAndChildrenById(Integer categoryId);
+    public ServerResponse<List<Integer>> selectCategoryAndChildrenById(Integer categoryId);
 
 }

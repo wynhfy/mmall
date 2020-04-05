@@ -7,14 +7,19 @@ import com.mmall.vo.ProductDetailVo;
 
 public interface IProductService {
 
-    public ServerResponse saveOrUpdateProduct(Product product);
+     ServerResponse saveOrUpdateProduct(Product product);
 
-    public ServerResponse setSaleStatus(Integer productId,Integer status);
+     ServerResponse setSaleStatus(Integer productId,Integer status);
 
-    public ServerResponse<ProductDetailVo> manageProductDetail(Integer productId);
+     ServerResponse<ProductDetailVo> manageProductDetail(Integer productId);
 
-    public ServerResponse<PageInfo> getList(Integer pageNum, Integer pageSize);
+     ServerResponse<PageInfo> getList(Integer pageNum, Integer pageSize);
 
-    public ServerResponse<PageInfo> searchProduct(String productName,Integer productId,Integer pageNum,Integer pageSize);
+     ServerResponse<PageInfo> searchProduct(String productName,Integer productId,Integer pageNum,Integer pageSize);
+
+     ServerResponse<ProductDetailVo> getProductDetail(Integer productId);
+
+     ServerResponse<PageInfo> getProductByKeywordCategory(String keyword,Integer categoryId,int pageNum,int pageSize,String orderBy);
+
 
 }
